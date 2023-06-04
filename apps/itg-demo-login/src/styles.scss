@@ -1,4 +1,4 @@
-@import 'styles/_variables';
+@import 'styles/variables';
 
 // Import functions, variables, and mixins needed by other Bootstrap files
 @import 'node_modules/bootstrap/scss/functions';
@@ -7,9 +7,9 @@
 @import 'node_modules/bootstrap/scss/mixins';
 @import 'node_modules/bootstrap/scss/maps';
 
-// Import Bootstrap Reboot
-@import 'node_modules/bootstrap/scss/root';
 // Contains :root CSS variables used by other Bootstrap files
+@import 'node_modules/bootstrap/scss/root';
+// Import Bootstrap Reboot
 @import 'node_modules/bootstrap/scss/reboot';
 
 // Import Bootstrap components

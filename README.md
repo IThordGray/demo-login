@@ -6,6 +6,9 @@ The demo includes both the front-end and back-end components, showcasing a holis
 
 With clear documentation and well-structured code, developers can easily navigate and understand the implementation details of this demo. By exploring this project, you can gain insights into creating secure and user-friendly login pages within your own Angular applications, using proven techniques and approaches.
 
+## Techniques used in the project
+[Setting up Angular and Bootstrap](documents/setting-up-angular-and-bootstap.md)
+
 # How to run the project
 
 1. Clone the repo
@@ -13,10 +16,8 @@ With clear documentation and well-structured code, developers can easily navigat
 
 ## How to run the Frontend
 
-1. Run `npm start`
+1. Run `nx s itg-demo-login`
 2. Open `http://localhost:4200/` in your browser
 
 ## How to run the Backend
-
-1. Clone the repo
-2.
+Todo: Need to still add the backend :)
