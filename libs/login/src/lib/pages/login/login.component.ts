@@ -6,7 +6,7 @@ import { AuthService, InvalidCredentialsError } from '../../auth.service';
 @Component({
   selector: 'lib-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: [ './login.component.scss' ]
 })
 export class LoginComponent {
   private readonly _authService = inject(AuthService);
@@ -14,7 +14,7 @@ export class LoginComponent {
 
   readonly loginFormGroup = new FormGroup({
     email: new FormControl<string>('', Validators.required),
-    password: new FormControl<string>('', Validators.required),
+    password: new FormControl<string>('', Validators.required)
   });
 
   async loginAsync(): Promise<void> {
@@ -28,15 +28,11 @@ export class LoginComponent {
 
     try {
       await this._authService.loginAsync(email!, password!);
-      await this._router.navigate(['/']);
+      await this._router.navigate([ '/' ]);
     } catch (e) {
       if (e instanceof InvalidCredentialsError) {
-        this.loginFormGroup.controls.email.setErrors({
-          invalidCredentials: true,
-        });
-        this.loginFormGroup.controls.password.setErrors({
-          invalidCredentials: true,
-        });
+        this.loginFormGroup.controls.email.setErrors({ invalidCredentials: true });
+        this.loginFormGroup.controls.password.setErrors({ invalidCredentials: true });
         return;
       }
     }

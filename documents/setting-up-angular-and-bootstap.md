@@ -109,7 +109,7 @@ a {
 
 Now we add the grid overrides to the _variables.scss file we created earlier to align with Angular's breakpoint system.
 
-```scss:
+```scss
 $container-max-widths: (
   xs: 0,
   sm: 600px,

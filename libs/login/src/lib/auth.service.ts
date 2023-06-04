@@ -19,18 +19,9 @@ export abstract class AuthService {
 
   abstract logoutAsync(): Promise<void>;
 
-  abstract registerAsync(
-    firstName: string,
-    lastName: string,
-    username: string,
-    password: string
-  ): Promise<void>;
+  abstract registerAsync(firstName: string, lastName: string, username: string, password: string): Promise<void>;
 
   abstract resetPasswordAsync(username: string): Promise<void>;
 
-  abstract setPasswordAsync(
-    userId: string,
-    resetCode: string,
-    password: string
-  ): Promise<void>;
+  abstract setPasswordAsync(userId: string, resetCode: string, password: string): Promise<void>;
 }
