@@ -1,0 +1,25 @@
+<div class="container-fluid h-100 background-illustration">
+  <div class="row h-100">
+    <div
+      class="left-container offset-sm-2 offset-md-0 col-sm-8 col-md-4 col-lg-3 border-end mat-elevation-z3">
+
+      <div class="form-container">
+        <div class="d-flex justify-content-center mb-8">
+          <itg-logo style="width: 7rem"></itg-logo>
+        </div>
+        <ng-content select="[form]"></ng-content>
+      </div>
+
+      <div class="text-center itg-tertiary">
+        <span>By logging in, you are accepting our latest &nbsp;</span>
+        <a class="text-decoration-none" href="#">Terms of Service</a>
+      </div>
+      <div class="text-center itg-tertiary">Build number: 852f99fde978d1a59d1862c815142777</div>
+    </div>
+    <div class="d-none d-md-flex flex-column col-md-8 col-lg-9 h-100">
+      <div class="px-2 mt-auto mb-auto d-flex justify-content-center align-items-center overflow-hidden rh-100">
+        <ng-content select="[illustration]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

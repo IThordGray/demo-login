@@ -1,0 +1,57 @@
+<itg-login-container>
+  <ng-container ngProjectAs="[form]">
+    <div class="itg-h1 mb-2">Log in</div>
+
+    <form [formGroup]="loginFormGroup" class="d-flex flex-column gap-1">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput placeholder="Enter your email address" type="email">
+        <mat-error class="itg-tertiary warn color" *ngIf="loginFormGroup.controls.email.hasError('required')">Please enter a valid email</mat-error>
+        <mat-error class="itg-tertiary warn color" *ngIf="loginFormGroup.controls.email.hasError('invalidCredentials')">Invalid credentials provided
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput placeholder="Enter your password" type="password">
+        <mat-error class="itg-tertiary warn color" *ngIf="loginFormGroup.controls.password.hasError('required')">Please enter a valid password
+        </mat-error>
+        <mat-error class="itg-tertiary warn color" *ngIf="loginFormGroup.controls.password.hasError('invalidCredentials')">Invalid credentials
+          provided
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-baseline">
+      <mat-checkbox><span class="itg-light">Remember me</span></mat-checkbox>
+      <a [routerLink]="['../reset-password']" class="fw-bolder primary">Forgot your password?</a>
+    </div>
+
+    <div class="d-flex flex-column gap-2 mt-6">
+      <button (click)="loginAsync()" color="primary" mat-flat-button>Login</button>
+      <div class="text-center">
+        <span>or</span>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="d-flex flex-grow-1" mat-stroked-button>
+          <mat-icon>facebook</mat-icon>
+          <span>Facebook</span>
+        </button>
+
+        <button class="d-flex flex-grow-1" mat-stroked-button>
+          <mat-icon>gmail</mat-icon>
+          <span>Google</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center flex-wrap mt-4">
+      <span class="itg-light">Don't have an account yet?</span>
+      <a [routerLink]="['../register']" class="ms-1 fw-bolder primary">Sign up</a>
+    </div>
+  </ng-container>
+
+  <ng-container ngProjectAs="[illustration]">
+    <img src="assets/login.svg">
+  </ng-container>
+</itg-login-container>
