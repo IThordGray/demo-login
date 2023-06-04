@@ -13,6 +13,29 @@ article [here](https://www.amadousall.com/the-best-parts-of-bootstrap-you-are-mi
 write-up is not meant to replace the original article, but rather to provide a quick reference for setting up Angular
 and Bootstrap and fix some issues introduced in Bootstrap 5.2.
 
+## TLDR; Final styles.scss after Bootstrap setup
+
+```scss
+@import 'styles/variables';
+
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/variables-dark';
+@import 'node_modules/bootstrap/scss/mixins';
+@import 'node_modules/bootstrap/scss/maps';
+
+@import 'node_modules/bootstrap/scss/root';
+@import 'node_modules/bootstrap/scss/reboot';
+
+@import 'node_modules/bootstrap/scss/containers';
+@import 'node_modules/bootstrap/scss/grid';
+
+@import 'node_modules/bootstrap/scss/utilities';
+@import 'node_modules/bootstrap/scss/utilities/api';
+
+@import 'styles/reset';
+```
+
 ## Adding Bootstrap
 
 ### Installing Bootstrap
@@ -126,10 +149,15 @@ The first is that spacing works in incremental steps, and the second is that spa
 
 When looking at Bootstrap's spacing utilities, they do not use equal increments:
 > 0 - for classes that eliminate the margin or padding by setting it to 0
+> 
 > 1 - (by default) for classes that set the margin or padding to $spacer * .25
+> 
 > 2 - (by default) for classes that set the margin or padding to $spacer * .5
+> 
 > 3 - (by default) for classes that set the margin or padding to $spacer
+> 
 > 4 - (by default) for classes that set the margin or padding to $spacer * 1.5
+> 
 > 5 - (by default) for classes that set the margin or padding to $spacer * 3
 
 This is NOT wrong, and reduces the number of spacing available to be used through the utilities. With fewer options,
