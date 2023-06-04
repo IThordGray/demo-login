@@ -7,7 +7,9 @@ The demo includes both the front-end and back-end components, showcasing a holis
 With clear documentation and well-structured code, developers can easily navigate and understand the implementation details of this demo. By exploring this project, you can gain insights into creating secure and user-friendly login pages within your own Angular applications, using proven techniques and approaches.
 
 ## Techniques used in the project
-[Setting up Angular and Bootstrap](documents/setting-up-angular-and-bootstap.md)
+- [Setting up Angular and Bootstrap](documents/setting-up-angular-and-bootstap.md)
+- [Content projection](documents/content-projection.md)
+- [A note about Dependency Injection](documents/constructor-injection-vs-injection-method.md)
 
 # How to run the project
 
