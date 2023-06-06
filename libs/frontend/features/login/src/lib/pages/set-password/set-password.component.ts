@@ -6,7 +6,7 @@ import { AuthService } from '../../auth.service';
 @Component({
   selector: 'lib-set-password',
   templateUrl: './set-password.component.html',
-  styleUrls: ['./set-password.component.scss'],
+  styleUrls: [ './set-password.component.scss' ]
 })
 export class SetPasswordComponent {
   private readonly _authService = inject(AuthService);
@@ -14,7 +14,7 @@ export class SetPasswordComponent {
 
   readonly setPasswordFormGroup = new FormGroup({
     password: new FormControl<string>('', Validators.required),
-    confirmPassword: new FormControl<string>('', Validators.required),
+    confirmPassword: new FormControl<string>('', Validators.required)
   });
 
   async setPasswordAsync(): Promise<void> {
@@ -26,18 +26,13 @@ export class SetPasswordComponent {
     const { password, confirmPassword } = this.setPasswordFormGroup.value;
 
     if (password !== confirmPassword) {
-      this.setPasswordFormGroup
-        .get('password')
-        ?.setErrors({ confirmPassword: true });
-      this.setPasswordFormGroup
-        .get('confirmPassword')
-        ?.setErrors({ confirmPassword: true });
+      this.setPasswordFormGroup.get('password')?.setErrors({ confirmPassword: true });
+      this.setPasswordFormGroup.get('confirmPassword')?.setErrors({ confirmPassword: true });
       return;
     }
 
     const userId = this._activatedRoute.snapshot.queryParamMap.get('userId');
-    const resetCode =
-      this._activatedRoute.snapshot.queryParamMap.get('resetCode');
+    const resetCode = this._activatedRoute.snapshot.queryParamMap.get('resetCode');
 
     await this._authService.setPasswordAsync(userId!, resetCode!, password!);
   }

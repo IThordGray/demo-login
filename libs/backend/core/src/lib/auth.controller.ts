@@ -1,8 +1,6 @@
 import { Body, ConflictException, Controller, HttpCode, Inject, Post, Req, UseGuards } from '@nestjs/common';
-import { getErrorMap } from 'backend/shared';
+import { getErrorMap, ILoginResult, IRegisterResponse } from 'backend/shared';
 import { Request } from 'express';
-import { LoginResult } from './auth/abstractions/login-result.interface';
-import { IRegisterResponse } from './auth/abstractions/register-response.interface';
 import { RequestWithUser } from './auth/abstractions/request-with-user.type';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/guards/jwt.guard';
@@ -18,7 +16,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @HttpCode(200)
-  async loginAsync(@Req() req: RequestWithUser): Promise<LoginResult> {
+  async loginAsync(@Req() req: RequestWithUser): Promise<ILoginResult> {
     return this._authService.loginAsync(req.user);
   }
 
@@ -32,7 +30,7 @@ export class AuthController {
   @UseGuards(JwtRefreshAuthGuard)
   @Post('refresh')
   @HttpCode(200)
-  async refreshAsync(@Req() req: RequestWithUser): Promise<LoginResult> {
+  async refreshAsync(@Req() req: RequestWithUser): Promise<ILoginResult> {
     return this._authService.refreshAsync(req.user);
   }
 
@@ -41,7 +39,9 @@ export class AuthController {
     try {
       return await this._authService.registerAsync({
         email: registerDto.email,
-        password: registerDto.password
+        password: registerDto.password as string,
+        firstName: registerDto.firstName as string,
+        lastName: registerDto.lastName as string
       });
     } catch (error) {
       if (error instanceof ConflictException) throw new ConflictException(getErrorMap('User').conflictError);

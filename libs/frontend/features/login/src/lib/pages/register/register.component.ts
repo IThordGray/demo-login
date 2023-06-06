@@ -6,7 +6,7 @@ import { AuthService } from '../../auth.service';
 @Component({
   selector: 'lib-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  styleUrls: [ './register.component.scss' ]
 })
 export class RegisterComponent {
   private readonly _authService = inject(AuthService);
@@ -17,7 +17,7 @@ export class RegisterComponent {
     lastName: new FormControl<string>('', Validators.required),
     email: new FormControl<string>('', Validators.required),
     password: new FormControl<string>('', Validators.required),
-    confirmPassword: new FormControl<string>('', Validators.required),
+    confirmPassword: new FormControl<string>('', Validators.required)
   });
 
   async registerAsync(): Promise<void> {
@@ -30,23 +30,14 @@ export class RegisterComponent {
     const { password, confirmPassword } = this.registerFormGroup.value;
 
     if (password !== confirmPassword) {
-      this.registerFormGroup
-        .get('password')
-        ?.setErrors({ confirmPassword: true });
-      this.registerFormGroup
-        .get('confirmPassword')
-        ?.setErrors({ confirmPassword: true });
+      this.registerFormGroup.get('password')?.setErrors({ confirmPassword: true });
+      this.registerFormGroup.get('confirmPassword')?.setErrors({ confirmPassword: true });
       return;
     }
 
     const { firstName, lastName, email } = this.registerFormGroup.value;
 
-    await this._authService.registerAsync(
-      firstName!,
-      lastName!,
-      email!,
-      password!
-    );
-    await this._router.navigate(['/']);
+    await this._authService.registerAsync(firstName!, lastName!, email!, password!);
+    await this._router.navigate([ '/' ]);
   }
 }

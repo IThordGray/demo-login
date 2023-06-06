@@ -1,9 +1,15 @@
+export interface ILoginResult {
+  accessToken: string;
+  expiresIn?: number;
+  refreshToken?: string;
+}
+
 export class LoginResult {
   tokenType = 'bearer';
 
   public accessToken!: string;
 
-  public expiresIn!: number;
+  public expiresIn?: number;
 
   public refreshToken?: string;
 

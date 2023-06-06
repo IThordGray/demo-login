@@ -1,13 +1,12 @@
 import { BadRequestException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { IRegisterResponse, LoginResult } from 'backend/shared';
 import { AuthEmailService } from '../shared/auth-email.service';
-import { User } from '../users/abstractions/user.model';
+import { BasicUserInfo, User } from '../users/abstractions/user.model';
 import { hashAndCompareAsync } from '../users/password.helper';
 import { UsersService } from '../users/users.service';
 import { AES_256_CBC } from './abstractions/aes_256_cbc';
-import { LoginResult } from './abstractions/login-result.interface';
-import { IRegisterResponse } from './abstractions/register-response.interface';
 import { IResetCode } from './abstractions/reset-code.interface';
 
 @Injectable()
@@ -57,7 +56,7 @@ export class AuthService {
     return new LoginResult({ accessToken, expiresIn: accessTokenExpiresIn });
   }
 
-  async registerAsync(createUserDto: Pick<User, 'email' | 'password'>): Promise<IRegisterResponse> {
+  async registerAsync(createUserDto: BasicUserInfo & { password: string }): Promise<IRegisterResponse> {
     const user = await this._usersService.createAsync(createUserDto as User);
     return { userId: user.id };
   }

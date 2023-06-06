@@ -4,3 +4,5 @@ export * from './lib/mapper';
 export * from './lib/error.constants';
 export * from './lib/error.map.interface';
 export * from './lib/remove-deleted.flag';
+export * from './lib/register-response.interface';
+export * from './lib/login-response.interface';

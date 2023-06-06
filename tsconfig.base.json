@@ -9,11 +9,9 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "frontend/features/login": [
-        "libs/frontend/features/login/src/public-api.ts"
-      ],
       "backend/core": ["libs/backend/core/src/index.ts"],
-      "backend/shared": ["libs/backend/shared/src/index.ts"]
+      "backend/shared": ["libs/backend/shared/src/index.ts"],
+      "frontend/features/login": ["libs/frontend/features/login/src/index.ts"]
     },
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
