@@ -18,7 +18,7 @@ With clear documentation and well-structured code, developers can easily navigat
 
 ## How to run the Frontend
 
-1. Run `nx s itg-demo-login`
+1. Run `nx s frontend`
 2. Open `http://localhost:4200/` in your browser
 
 ## How to run the Backend
