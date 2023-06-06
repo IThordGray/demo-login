@@ -24,7 +24,7 @@
           "apps/itg-demo-login/src/assets",
           {
             "glob": "**/*",
-            "input": "libs/login/src/assets/",
+            "input": "libs/frontend/features/login/src/assets",
             "output": "assets/"
           }
         ],

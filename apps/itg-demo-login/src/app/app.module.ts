@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthService } from '@itg/login';
+import { AuthService } from 'frontend/features/login';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

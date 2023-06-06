@@ -9,7 +9,11 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "@itg/login": ["libs/login/src/public-api.ts"]
+      "frontend/features/login": [
+        "libs/frontend/features/login/src/public-api.ts"
+      ],
+      "backend/core": ["libs/backend/core/src/index.ts"],
+      "backend/shared": ["libs/backend/shared/src/index.ts"]
     },
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,

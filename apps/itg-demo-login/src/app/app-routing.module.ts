@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () =>
-      import('libs/login/src/public-api').then((m) => m.LoginModule),
+      import('libs/frontend/features/login/src/public-api').then((m) => m.LoginModule),
   },
   {
     path: '',

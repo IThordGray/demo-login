@@ -1,5 +1,9 @@
 import { HttpParams } from '@angular/common/http';
-import { AuthService, InvalidCredentialsError, IUser } from '@itg/login';
+import {
+  AuthService,
+  InvalidCredentialsError,
+  IUser,
+} from 'frontend/features/login';
 
 export class AuthFakeService implements AuthService {
   private readonly _users = new Map<string, IUser & { password?: string }>();
