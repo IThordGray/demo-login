@@ -14,7 +14,7 @@ the container style the projected content, but is done by switching the containe
 Each "page" has a _form_ and specific _illustration_. The form should grow and shrink columns depending on screen size,
 and on small devices the illustration should be hidden.
 
-![img.png](img.png)
+![img.png](content-projection.png)
 
 In order to achieve the desired layout, the template looks like this:
 
