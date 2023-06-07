@@ -27,14 +27,19 @@ export class AuthRealService implements AuthService {
   private readonly _activatedRoute = inject(ActivatedRoute);
 
   private _refreshTokenTimer: number | undefined;
-  private _resetCode?: string;
+
   readonly silentlyRefreshed$ = new Subject<void>();
   readonly isAuthenticated$ = new BehaviorSubject<boolean>(false);
+
   accessToken?: string;
   user?: IUser;
 
   constructor() {
     this.checkExistingTokenAsync();
+
+    this.silentlyRefreshed$.subscribe(() => {
+      this.refreshAsync();
+    });
   }
 
   private setTokens(loginResponse: ILoginResult): void {
@@ -55,6 +60,10 @@ export class AuthRealService implements AuthService {
     this._refreshTokenTimer = window.setTimeout(() => this.refreshAsync(), ms);
   }
 
+  /**
+   * Checks whether there is a valid access token in local storage.
+   * Depending on the url and the tokens, the user is redirected to the correct page.
+   */
   async checkExistingTokenAsync() {
     function clearStorage(): void {
       localStorage.removeItem('accessToken');
@@ -89,6 +98,7 @@ export class AuthRealService implements AuthService {
       expiresIn: undefined
     };
 
+    console.log('Existing access token is valid');
     this.startRefreshTokenTimer(getTokenRefreshTimeInMs(loginResponse.accessToken));
     this.setTokens(loginResponse);
   }

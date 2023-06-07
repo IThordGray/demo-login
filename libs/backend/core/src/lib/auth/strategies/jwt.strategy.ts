@@ -18,7 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      // Todo: Investigate PEM-encoded public key
       secretOrKey: _configService.get('JWT_ACCESS_TOKEN_SECRET')
     });
   }

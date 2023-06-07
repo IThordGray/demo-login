@@ -21,7 +21,6 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh'
     super({
       jwtFromRequest: ExtractJwt.fromBodyField('refresh_token'),
       ignoreExpiration: false,
-      // Todo: Investigate PEM-encoded public key
       secretOrKey: _configService.get('JWT_REFRESH_TOKEN_SECRET'),
       passReqToCallback: true
     });

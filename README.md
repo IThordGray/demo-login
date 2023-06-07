@@ -22,4 +22,7 @@ With clear documentation and well-structured code, developers can easily navigat
 2. Open `http://localhost:4200/` in your browser
 
 ## How to run the Backend
-Todo: Need to still add the backend :)
+
+1. Run `nx s backend`
+2. You can access the API at `http://localhost:3333/`
+3. 

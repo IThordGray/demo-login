@@ -74,14 +74,16 @@ export class AuthService {
       userId: user.id
     };
 
+
+    // Todo: Store code.
+
     const encodedResetCode = Buffer.from(JSON.stringify(resetCode)).toString('base64');
     const encryptedResetCode = AES_256_CBC.encrypt(encodedResetCode);
 
-    const resetLink = `${ referer }/auth/setPassword?userId=${ user.id }&resetCode=${ encryptedResetCode }`;
+    const resetLink = `${ referer }/auth/set-password?userId=${ user.id }&resetCode=${ encryptedResetCode }`;
 
     await this._emailService?.sendAsync(this._emailService.getResetPasswordEmail({ email, resetLink }));
   }
-
 
   async setPasswordAsync(userId: string, code: string, password: string): Promise<void> {
     const decryptedCode = AES_256_CBC.decrypt(code);
@@ -106,22 +108,15 @@ export class AuthService {
     }
 
     await this._usersService.updateAsync(userId, { ...user, password, resetCodeSegment });
-    // const passwordSetEmail = new EmailBuilder()
-    //   .setRecipient(resetCode.email)
-    //   .addSubstitution('firstName', user.email)
-    //   .setTemplateId('d-898f2f9b0c0a4797b0838f0f592dc377')
-    //   .build();
-    //
-    // // Todo: Create an audit log of the successful password reset.
     await this._emailService?.sendAsync(this._emailService.getSetPasswordEmail({ email: resetCode.email }));
   }
-
 
   async validateUserAsync(username: string, password: string): Promise<Omit<User, 'password'>> {
     const user = await this._usersService.getByEmailAsync(username).catch(() => undefined);
 
-    if (!user || !(await hashAndCompareAsync(password, user?.password)))
+    if (!user || !(await hashAndCompareAsync(password, user?.password))) {
       throw new UnauthorizedException('Wrong credentials provided');
+    }
 
     delete user.password;
     return user;
