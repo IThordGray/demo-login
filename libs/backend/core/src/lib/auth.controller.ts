@@ -1,8 +1,9 @@
-import { Body, ConflictException, Controller, HttpCode, Inject, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, ConflictException, Controller, Get, HttpCode, Inject, Post, Req, UseGuards } from '@nestjs/common';
 import { getErrorMap, ILoginResult, IRegisterResponse } from 'backend/shared';
 import { Request } from 'express';
 import { RequestWithUser } from './auth/abstractions/request-with-user.type';
 import { AuthService } from './auth/auth.service';
+import { GoogleOAuthGuard } from './auth/guards/google.oauth.guard';
 import { JwtAuthGuard } from './auth/guards/jwt.guard';
 import { LocalAuthGuard } from './auth/guards/local.guard';
 import { JwtRefreshAuthGuard } from './auth/guards/refresh-jwt.guard';
@@ -13,10 +14,22 @@ export class AuthController {
 
   @Inject(AuthService) private readonly _authService!: AuthService;
 
+
+  @UseGuards(GoogleOAuthGuard)
+  @Get('login/google')
+  async loginViaGoogleAsync() {
+  }
+
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @HttpCode(200)
   async loginAsync(@Req() req: RequestWithUser): Promise<ILoginResult> {
+    return this._authService.loginAsync(req.user);
+  }
+
+  @Get('login/google/callback')
+  @UseGuards(GoogleOAuthGuard)
+  async loginViaGoogleCallbackAsync(@Req() req: RequestWithUser): Promise<ILoginResult> {
     return this._authService.loginAsync(req.user);
   }
 

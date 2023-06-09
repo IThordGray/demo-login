@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth/auth.service';
+import { GoogleOAuthStrategy } from './auth/strategies/google.oauth.strategy';
 import { JwtRefreshStrategy } from './auth/strategies/jwt-refresh.strategy';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
 import { LocalStrategy } from './auth/strategies/local.strategy';
@@ -24,7 +25,8 @@ const REPOSITORIES = [
 const STRATEGIES = [
   LocalStrategy,
   JwtStrategy,
-  JwtRefreshStrategy
+  JwtRefreshStrategy,
+  GoogleOAuthStrategy
 ];
 
 @Module({

@@ -7,7 +7,7 @@ export class UsersService {
   @Inject(UsersRepository) protected readonly _repo!: UsersRepository;
 
   async createAsync(model: User): Promise<User> {
-    model.password = await hashPasswordAsync(model.password!);
+    if (model.password) model.password = await hashPasswordAsync(model.password!);
     return await this._repo.createAsync(model);
   }
 

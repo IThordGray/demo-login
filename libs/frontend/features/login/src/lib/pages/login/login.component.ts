@@ -37,4 +37,9 @@ export class LoginComponent {
       }
     }
   }
+
+  async loginWithGoogleAsync(): Promise<void> {
+    await this._authService.loginWithGoogleAsync();
+    await this._router.navigate([ '/' ]);
+  }
 }

@@ -13,12 +13,12 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   @Inject(UsersService) private readonly _usersService!: UsersService;
 
   constructor(
-    _configService: ConfigService
+    configService: ConfigService
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: _configService.get('JWT_ACCESS_TOKEN_SECRET')
+      secretOrKey: configService.get('JWT_ACCESS_TOKEN_SECRET')
     });
   }
 

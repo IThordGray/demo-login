@@ -2,6 +2,7 @@ import { BadRequestException, Inject, Injectable, UnauthorizedException } from '
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { IRegisterResponse, LoginResult } from 'backend/shared';
+import { IUser } from 'frontend/features/login';
 import { AuthEmailService } from '../shared/auth-email.service';
 import { BasicUserInfo, User } from '../users/abstractions/user.model';
 import { hashAndCompareAsync } from '../users/password.helper';
