@@ -42,6 +42,18 @@ export class AuthRealService implements AuthService {
     });
   }
 
+  private async doLoginAsync(loginResult: ILoginResult): Promise<void> {
+    localStorage.setItem('accessToken', loginResult.accessToken);
+    localStorage.setItem('refreshToken', loginResult.refreshToken!);
+
+    this.startRefreshTokenTimer(getTokenRefreshTimeInMs(loginResult.accessToken));
+
+    this.setTokens(loginResult);
+    const redirectUrl = this._router.parseUrl(this._activatedRoute.snapshot.queryParamMap.get('redirectUrl') ?? '/');
+    await this._router.navigateByUrl(redirectUrl);
+    alert('Login successful');
+  }
+
   private setTokens(loginResponse: ILoginResult): void {
     this.accessToken = loginResponse.accessToken;
     const jwt: IJwt & { userInfo?: IUser } = decodeJwt(loginResponse.accessToken);
@@ -106,15 +118,17 @@ export class AuthRealService implements AuthService {
   async loginAsync(username: string, password: string): Promise<void> {
     try {
       const loginResult = await this._authApi.loginAsync(username, password);
-      localStorage.setItem('accessToken', loginResult.accessToken);
-      localStorage.setItem('refreshToken', loginResult.refreshToken!);
+      await this.doLoginAsync(loginResult);
+    } catch (e) {
+      console.warn(e);
+      this._router.navigateByUrl('/auth/login');
+    }
+  }
 
-      this.startRefreshTokenTimer(getTokenRefreshTimeInMs(loginResult.accessToken));
-
-      this.setTokens(loginResult);
-      const redirectUrl = this._router.parseUrl(this._activatedRoute.snapshot.queryParamMap.get('redirectUrl') ?? '/');
-      await this._router.navigateByUrl(redirectUrl);
-      alert('Login successful');
+  async loginWithGoogleAsync(): Promise<void> {
+    try {
+      const loginResult = await this._authApi.loginWithGoogleAsync();
+      await this.doLoginAsync(loginResult);
     } catch (e) {
       console.warn(e);
       this._router.navigateByUrl('/auth/login');
@@ -143,6 +157,11 @@ export class AuthRealService implements AuthService {
     alert('Registration successful');
   }
 
+  async registerWithGoogleAsync(): Promise<void> {
+    await this._authApi.registerWithGoogleAsync();
+    await this._router.navigateByUrl('/auth/login');
+    alert('Registration successful');
+  }
   async resetPasswordAsync(username: string): Promise<void> {
     await this._authApi.resetPasswordAsync(username);
     alert('Check your email for a reset code');

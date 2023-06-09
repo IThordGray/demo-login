@@ -4,8 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { DomSanitizer } from '@angular/platform-browser';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { LOGIN_ROUTES } from './login.routes';
 import { LoginComponent } from './pages/login/login.component';
@@ -27,6 +28,7 @@ import { LogoComponent } from './components/logo/logo.component';
     RouterModule.forChild(LOGIN_ROUTES),
     ReactiveFormsModule,
     MatCheckboxModule,
+
   ],
   declarations: [
     LoginContainerComponent,
@@ -38,4 +40,12 @@ import { LogoComponent } from './components/logo/logo.component';
     LogoComponent,
   ],
 })
-export class LoginModule {}
+export class LoginModule {
+  constructor(
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer
+  ) {
+    iconRegistry.addSvgIcon('google', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/google.svg'));
+    iconRegistry.addSvgIcon('facebook', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/facebook.svg'));
+  }
+}

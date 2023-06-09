@@ -61,15 +61,14 @@
         <span>or</span>
       </div>
       <div class="d-flex gap-2">
-        <button class="d-flex flex-grow-1" mat-stroked-button>
-          <mat-icon>facebook</mat-icon>
+        <button class="d-flex flex-grow-1" mat-stroked-button (click)="loginWithGoogleAsync()">
+          <span>Google</span>
+        </button>
+
+        <button class="d-flex flex-grow-1" mat-stroked-button [disabled]="true">
           <span>Facebook</span>
         </button>
 
-        <button class="d-flex flex-grow-1" mat-stroked-button>
-          <mat-icon>gmail</mat-icon>
-          <span>Google</span>
-        </button>
       </div>
     </div>
 

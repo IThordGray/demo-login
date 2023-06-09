@@ -17,6 +17,8 @@ export abstract class AuthService {
 
   abstract loginAsync(username: string, password: string): Promise<void>;
 
+  abstract loginWithGoogleAsync(): Promise<void>;
+
   abstract logoutAsync(): Promise<void>;
 
   abstract registerAsync(firstName: string, lastName: string, username: string, password: string): Promise<void>;

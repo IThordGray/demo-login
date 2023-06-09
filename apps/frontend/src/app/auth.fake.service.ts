@@ -1,9 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import {
-  AuthService,
-  InvalidCredentialsError,
-  IUser,
-} from 'frontend/features/login';
+import { AuthService, InvalidCredentialsError, IUser } from 'frontend/features/login';
 
 export class AuthFakeService implements AuthService {
   private readonly _users = new Map<string, IUser & { password?: string }>();
@@ -26,6 +22,10 @@ export class AuthFakeService implements AuthService {
     this.accessToken = btoa(JSON.stringify(user));
   }
 
+  async loginWithGoogleAsync(): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
   async logoutAsync(): Promise<void> {
     this.accessToken = undefined;
     this.user = undefined;
@@ -44,7 +44,7 @@ export class AuthFakeService implements AuthService {
       firstName,
       lastName,
       email: username,
-      password,
+      password
     };
 
     this._users.set(user.id, user);
@@ -61,9 +61,9 @@ export class AuthFakeService implements AuthService {
 
     const resetCode = (this._resetCode = 'abc');
     const params = new HttpParams({
-      fromObject: { userId: user.id, resetCode },
+      fromObject: { userId: user.id, resetCode }
     });
-    const url = `${location.href}?${params.toString()}`;
+    const url = `${ location.href }?${ params.toString() }`;
     console.log(url);
   }
 
